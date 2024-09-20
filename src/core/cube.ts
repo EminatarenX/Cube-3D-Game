@@ -1,8 +1,12 @@
 import * as THREE from "three";
 import { Spike } from "./spike";
 
-const jumpWorker = new Worker(
+const counter = new Worker(
   new URL("/src/workers/counter.worker.ts", import.meta.url)
+);
+
+const calculateJump = new Worker(
+  new URL("/src/workers/jump.worker.ts", import.meta.url)
 );
 
 export class Cube extends THREE.Object3D {
@@ -32,7 +36,7 @@ export class Cube extends THREE.Object3D {
     this.alive = true;
     this.scale.set(0.1, 0.1, 0.1);
 
-    jumpWorker.onmessage = (event) => {
+    counter.onmessage = (event) => {
       this.jump.total = event.data;
     };
   }
@@ -71,7 +75,7 @@ export class Cube extends THREE.Object3D {
     if (!this.jump.active) {
       this.jump.active = true;
       // this.jump.total += 1;
-      jumpWorker.postMessage("startJump");
+      counter.postMessage("startJump");
     } else {
       this.jump.active = false;
     }
@@ -80,22 +84,29 @@ export class Cube extends THREE.Object3D {
   saltar() {
     if (this.jump.active) {
       this.jump.time += 0.016 * 2;
-      const t = (this.jump.time % this.jump.duration) / this.jump.duration;
-      const y = Math.sin(t * Math.PI) * this.jump.height;
-      const rotate = Math.PI * t;
-      this.rotation.z = -rotate + 0.07;
-      this.position.y = y;
-      if (this.jump.time > 1) {
-        this.setJump();
-        this.jump.time = 0;
-        this.position.y = 0;
-      }
+      calculateJump.postMessage({
+        jumpTime: this.jump.time,
+        jumpDuration: this.jump.duration,
+        jumpHeight: this.jump.height,
+      });
+      calculateJump.onmessage = (e) => {
+        const { y, rotate } = e.data;
+
+        this.rotation.z = -rotate + 0.07;
+        this.position.y = y;
+
+        if (this.jump.time > 1) {
+          this.setJump();
+          this.jump.time = 0;
+          this.position.y = 0;
+        }
+      };
     }
   }
 
   accelerate() {
     if (this.alive) {
-      this.position.x += 0.01;
+      this.position.x += 0.03;
     }
   }
 
@@ -112,7 +123,8 @@ export class Cube extends THREE.Object3D {
       if (
         +(this.position.x + this.getDimensions().x / 2).toFixed(2) >=
           spike.position.x - this.getDimensions().x / 2 &&
-          +(this.position.x - this.getDimensions().x /2).toFixed(2) <= spike.position.x + this.getDimensions().x /2 &&
+        +(this.position.x - this.getDimensions().x / 2).toFixed(2) <=
+          spike.position.x + this.getDimensions().x / 2 &&
         +(this.position.y / 2).toFixed(2) == spike.position.y / 2
       ) {
         this.alive = false;
