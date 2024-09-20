@@ -1,10 +1,12 @@
 import * as THREE from "three";
-import { Cube } from "../entities/cube";
+import { Cube } from "./cube";
 
 export class Plane extends THREE.Object3D {
+  private geometry: THREE.PlaneGeometry
   constructor(width: number, height: number) {
+    
     super();
-    const geometry = new THREE.PlaneGeometry(width, height, 100,100);
+    this.geometry = new THREE.PlaneGeometry(width, height, 100,100);
     const material = new THREE.MeshBasicMaterial({
       color: '#1A1A1A',
       side: THREE.DoubleSide,
@@ -12,10 +14,17 @@ export class Plane extends THREE.Object3D {
       
     });
 
-    this.add(new THREE.Mesh(geometry, material));
+    this.add(new THREE.Mesh(this.geometry, material));
     
     this.rotation.x = Math.PI / 2;
     
+  }
+
+  getSize() {
+    return {
+      width: this.geometry.parameters.width,
+      height: this.geometry.parameters.height
+    }
   }
 
 

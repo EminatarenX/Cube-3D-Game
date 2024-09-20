@@ -8,14 +8,14 @@ export class Camera extends THREE.PerspectiveCamera {
     this.position.z = 10;
   }
 
-  setInitialPosition() {
-    if (this.initialPosition) {
-      this.position.x += 0.4 / 150;
-      this.position.y += 0.5 / 3 / 150;
-      this.position.z -= (1 * 8) / 150;
-      if (this.position.z <= 1) {
-        this.initialPosition = false;
-      }
-    }
+  getInitialPosition() {
+    return this.initialPosition;
+  }
+
+
+  target(position: THREE.Vector3): void {
+    
+    this.position.set(position.x , position.y + 0.1 , position.z + 1.5)
+    this.lookAt(position);
   }
 }

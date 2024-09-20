@@ -5,7 +5,6 @@ import { routes } from "./routes"
 
 export class Router {
     setup(page: string){
-        page= GAME
         switch( page ) {
             case MAIN_MENU: 
               document.body.innerHTML = routes[MAIN_MENU].component
@@ -22,3 +21,5 @@ export class Router {
           }
     }
 }
+
+export const router = new Router(); 
