@@ -29,6 +29,12 @@ export const game = {
     scene.add(plane);
     scene.add(environment);
     window.addEventListener("keydown", (event) => cube.handleJump(event));
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+    
 
     const spikeCount = 50;
     const spikes: Spike[] = [];

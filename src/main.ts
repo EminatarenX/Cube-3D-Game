@@ -1,6 +1,5 @@
 import "./index.css";
 import { Camera } from "./core/camera";
-import { renderer } from "./core/renderer";
 import { router } from "./routes/setup";
 import { GAME, MAIN_MENU } from "./pages";
 
