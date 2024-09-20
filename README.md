@@ -16,7 +16,6 @@ Un juego de acción en 3D donde debes saltar sobre spikes tridimensionales en un
 * Estilos de botones y marcadores utilizando Tailwind CSS.
 
 ## Capturas de Pantalla
-=====================
 
 ### Menú Principal
 
@@ -32,7 +31,7 @@ Un juego de acción en 3D donde debes saltar sobre spikes tridimensionales en un
 
 ## Requisitos para Correr el Juego
 
-* Node.js (versión 14 o superior)
+* Node.js (versión 18 o superior)
 * TypeScript (versión 4.x o superior)
 * TreeJS
 * Tailwind CSS
