@@ -106,7 +106,7 @@ export class Cube extends THREE.Object3D {
 
   accelerate() {
     if (this.alive) {
-      this.position.x += 0.01;
+      this.position.x += 0.02;
     }
   }
 
