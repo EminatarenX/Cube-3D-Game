@@ -14,9 +14,3 @@ playbutton?.addEventListener("click", () => {
 export function mainMenu() {
   router.setup(MAIN_MENU);
 }
-
-window.addEventListener("resize", () => {
-  // camera.aspect = window.innerWidth / window.innerHeight;
-  // camera.updateProjectionMatrix();
-  // renderer.setSize(window.innerWidth, window.innerHeight);
-});
