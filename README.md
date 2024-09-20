@@ -20,15 +20,15 @@ Un juego de acción en 3D donde debes saltar sobre spikes tridimensionales en un
 
 ### Menú Principal
 
-![Menu Principal](imagen1.png)
+![Menu Principal](/public/menu.png)
 
 ### En Juego
 
-![En Juego](imagen2.png)
+![En Juego](/public/in-game-jump.png)
 
 ### Perder
 
-![Perder](imagen3.png)
+![Perder](/public/game-over.png)
 
 ## Requisitos para Correr el Juego
 
