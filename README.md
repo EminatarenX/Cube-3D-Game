@@ -1,7 +1,7 @@
 # Geometria Dash
 
 
-Un juego de acción en 3D donde debes saltar sobre spikes tridimensionales en un espacio en constante movimiento. ![link](https://main--geometriadash.netlify.app/)
+Un juego de acción en 3D donde debes saltar sobre spikes tridimensionales en un espacio en constante movimiento. [link](https://main--geometriadash.netlify.app/)
 
 ## Características del Juego
 
