@@ -42,7 +42,7 @@ export const game = {
     let positionX = 100;
     for (let i = 0; i < spikeCount; i++) {
       const spike = new Spike();
-      spike.position.x = positionX * Math.random();
+      spike.position.x = (positionX * Math.random()) + 2;
 
       scene.add(spike);
 
