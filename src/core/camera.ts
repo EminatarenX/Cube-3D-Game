@@ -15,7 +15,7 @@ export class Camera extends THREE.PerspectiveCamera {
 
   target(position: THREE.Vector3): void {
     
-    this.position.set(position.x , position.y + 0.1 , position.z + 1.5)
+    this.position.set(position.x - 1 , position.y + 0.3 , position.z + 1)
     this.lookAt(position);
   }
 }

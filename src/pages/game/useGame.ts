@@ -3,7 +3,12 @@ import { Cube } from "../../core/cube";
 
 export const useGame = () => {
     const gameOver = (section: Element, cube: Cube, time: number) => {
+      const record = localStorage.getItem('record');
+      const recordObj  = record && JSON.parse(record);
+      
+       if(recordObj.time < time){
         localStorage.setItem('record', JSON.stringify({totalJumps: cube.getTotalJumps(), time: time.toFixed(2)}))
+       }
         
         if (section) {
           section.innerHTML = `

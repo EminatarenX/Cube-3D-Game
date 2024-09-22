@@ -14,6 +14,11 @@ export const landing = {
       Play 
     </button>
 
+    <a href="https://github.com/EminatarenX" class="text-white absolute top-10 right-5 text-xl flex gap-2 items-center"> 
+    <img src="https://static-00.iconduck.com/assets.00/github-icon-2048x2048-4uclrgic.png" class="w-10 h-10 invert" />
+      EminatarenX
+    </span>
+
 </section>
 `,
 };
