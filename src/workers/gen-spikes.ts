@@ -11,7 +11,7 @@ self.onmessage = (e: MessageEvent) => {
         }
     }
      
-    spikes.push(spikeData);
+    spikes.push(spikeData);  
   }
 
   postMessage({spikes}); 
