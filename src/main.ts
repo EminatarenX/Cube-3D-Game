@@ -12,7 +12,3 @@ playbutton?.addEventListener("click", () => {
   deadmau5.play();
   router.setup(GAME);
 });
-
-// export function mainMenu() {
-//   router.setup(MAIN_MENU);
-// }
