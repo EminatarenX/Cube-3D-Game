@@ -8,6 +8,7 @@ import { Environment } from "../../core/environment";
 import { Spike } from "../../core/spike";
 import { useGame } from "./useGame";
 
+const genSpikes = new Worker(new URL('/src/workers/gen-spikes.ts', import.meta.url)) 
 const { gameOver } = useGame();
 
 export const game = {
@@ -29,6 +30,7 @@ export const game = {
     scene.add(plane);
     scene.add(environment);
     window.addEventListener("keydown", (event) => cube.handleJump(event));
+    window.addEventListener('click', () => cube.handleJumpClick());
     window.addEventListener("resize", () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -36,19 +38,21 @@ export const game = {
     });
     
 
-    const spikeCount = 50;
+    const spikeCount = 350;
     const spikes: Spike[] = [];
 
-    let positionX = 100;
-    for (let i = 0; i < spikeCount; i++) {
-      const spike = new Spike();
-      spike.position.x = (positionX * Math.random()) + 2;
-
-      scene.add(spike);
-
-      spikes.push(spike);
-
-      positionX += 2;
+    let range = 1000;
+    genSpikes.postMessage({
+     range, spikeNumber: spikeCount
+    })
+    genSpikes.onmessage = (event) => {
+      const { spikes: spikesData } = event.data
+      spikesData.forEach( (data: { position: { x: number}}) => {
+        const spike = new Spike();
+        spike.position.x = data.position.x;
+        scene.add(spike);
+        spikes.push(spike)
+      })
     }
 
     function animate() {

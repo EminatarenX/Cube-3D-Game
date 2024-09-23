@@ -117,6 +117,11 @@ export class Cube extends THREE.Object3D {
       }
     }
   }
+  handleJumpClick() {
+    if (!this.isJumping() && this.alive) {
+      this.setJump();
+    }
+  }
 
   checkCollision(spikes: Spike[]) {
     spikes.forEach((spike) => {
