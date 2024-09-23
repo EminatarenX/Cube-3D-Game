@@ -9,6 +9,8 @@ export const cameraClass = new Camera();
 
 const playbutton = document.getElementById("play-button");
 playbutton?.addEventListener("click", () => {
+  deadmau5.currentTime = 3;
   deadmau5.play();
+
   router.setup(GAME);
 });
